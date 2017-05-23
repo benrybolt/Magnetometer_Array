@@ -1,0 +1,17 @@
+arduino-serial see https://todbot.com/blog/2006/12/06/arduino-serial-c-code-to-talk-to-arduino/
+
+./arduino-serial -b 9600 -q -p /dev/ttyACM0 -r
+above command will read one line while magnetometer is running
+
+
+./arduino-serial -b 9600 -q -p /dev/ttyACM0 -r >> data.txt
+// reads one line and saves it in file data.txt (needs to exist)
+
+
+// repeats indefinitley
+while sleep 0; do ./arduino-serial -q -b 9600 -p /dev/ttyACM1 -r >>data.txt; done
+
+// ploting result (not including time)
+gnuplot> plot "~/Arduino/libraries/arduino-serial/data.txt" using 3 with lines;
+gnuplot> replot "~/Arduino/libraries/arduino-serial/data.txt" using 2 with lines;
+gnuplot> replot "~/Arduino/libraries/arduino-serial/data.txt" using 1 with lines;
